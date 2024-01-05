@@ -1,20 +1,20 @@
 version: '3.1'
 services:
-  nginx:
+  web:
     image: nwtgck/nginx-http3
     ports:
       - '80:80'
       - '443:443'
       - '443:443/udp'
     depends_on:
-      - php
+      - app
     restart: always
     volumes:
-      - ./nginx.conf:/usr/local/nginx/conf/nginx.conf
+      - ./default.conf:/usr/local/nginx/conf/nginx.conf
       - ./ssl/server.crt:/etc/ssl/certs/server.crt
       - ./ssl/server.key:/etc/ssl/private/server.key
 
-  php:
+  app:
     image: php:7.4-fpm-alpine
     restart: always
     volumes:
